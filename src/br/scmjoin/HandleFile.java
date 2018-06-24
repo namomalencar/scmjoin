@@ -1,5 +1,6 @@
 package br.scmjoin;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -64,7 +65,7 @@ public class HandleFile {
 	 * @throws Exception
 	 */
 	public RafIO open(String fileName) throws Exception {
-		// fileNum++;
+//		fileNum++;
 		this.raf = new RafIO(fileNum, fileName);
 		this.block = new byte[RafIO.getBlockSize()]; // block used for fill
 														// tuples on block
@@ -767,11 +768,6 @@ public class HandleFile {
 		temp = RafIOCalc.getByteArray(indCol);
 		rowidB[10] = temp[0];
 		rowidB[11] = temp[1];
-//		if (readRowidBlocks == null) {
-//			readRowidBlocks = new ArrayList<Integer>();
-//			readRowidBlocks.add(blockNo);
-//		} else if (!readRowidBlocks.contains(blockNo))
-//			readRowidBlocks.add(blockNo);
 		// rowid = String.format("%03d", raf.getContainerNo()) +
 		// String.format("%08d",this.currentBlock) +
 		// String.format("%08d",this.currentTupleId) + String.format("%03d",
@@ -779,6 +775,39 @@ public class HandleFile {
 		temp = null;
 		return rowidB;
 	} // getRowid
+	
+	public byte[] getRowid(int indCol, int blockNo) {
+		// String rowid ="";
+		// int i = 0;
+		byte[] rowidB = new byte[12];
+		byte[] temp = RafIOCalc.getByteArray(raf.getContainerNo());
+		rowidB[0] = temp[0];
+		rowidB[1] = temp[1];
+		temp = RafIOCalc.getByteArray(blockNo);
+		rowidB[2] = temp[0];
+		rowidB[3] = temp[1];
+		rowidB[4] = temp[2];
+		rowidB[5] = temp[3];
+		temp = RafIOCalc.getByteArray(this.currentTupleId);
+		rowidB[6] = temp[0];
+		rowidB[7] = temp[1];
+		rowidB[8] = temp[2];
+		rowidB[9] = temp[3];
+		temp = RafIOCalc.getByteArray(indCol);
+		rowidB[10] = temp[0];
+		rowidB[11] = temp[1];
+		if (readRowidBlocks == null) {
+			readRowidBlocks = new ArrayList<Integer>();
+			readRowidBlocks.add(blockNo);
+		} else if (!readRowidBlocks.contains(blockNo))
+			readRowidBlocks.add(blockNo);
+//		 rowid = String.format("%03d", raf.getContainerNo()) +
+//		 String.format("%08d",this.currentBlock) +
+//		 String.format("%08d",this.currentTupleId) + String.format("%03d",
+//		 indCol);
+		temp = null;
+		return rowidB;
+	}
 
 	/**
 	 * Read a tuple by the rowid
@@ -799,11 +828,13 @@ public class HandleFile {
 				block = this.raf.readBlock(blockNo);
 				currentReadRowidBlock = block;
 				currentReadRowidBlockNo = blockNo;
-				if (readRowidBlocks == null) {
-					readRowidBlocks = new ArrayList<Integer>();
-					readRowidBlocks.add(blockNo);
-				} else if (!readRowidBlocks.contains(blockNo))
-					readRowidBlocks.add(blockNo);
+				// if (readRowidBlocks==null) {
+				// readRowidBlocks = new ArrayList<Integer>();
+				// readRowidBlocks.add(blockNo);
+				// }
+				// else
+				// if (!readRowidBlocks.contains(blockNo))
+				// readRowidBlocks.add(blockNo);
 			} else
 				block = currentReadRowidBlock;
 
@@ -1106,5 +1137,7 @@ public class HandleFile {
 		}
 
 	}
+
+	
 
 }

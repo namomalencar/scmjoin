@@ -14,13 +14,10 @@ public class FlashJoinV5 {
 	private static LogFile resultlog;
 	public static int blockSize = 8192;
 	byte block[] = new byte[blockSize];
-	byte tupleBlock[], keys[], rowid[], keysSmaller[], blockAuxBigger[],
-			keysBigger[];
-	int keyJoin, hashResult, numbersOfTuplesInMemorySmaller,
-			numbersOfKeysInMemorySmaller, numbersOfTuplesInMemoryBigger,
-			numbersOfKeysInMemoryBigger, memoryUsed = 0, keyHashMapSmaller,
-			numblockreaded, currentTupleId, numblockreadedAuxBigger,
-			numberoftupleInFetch, memoryUsedInFetch = 0;
+	byte tupleBlock[], keys[], rowid[], keysSmaller[], blockAuxBigger[], keysBigger[];
+	int keyJoin, hashResult, numbersOfTuplesInMemorySmaller, numbersOfKeysInMemorySmaller,
+			numbersOfTuplesInMemoryBigger, numbersOfKeysInMemoryBigger, memoryUsed = 0, keyHashMapSmaller,
+			numblockreaded, currentTupleId, numblockreadedAuxBigger, numberoftupleInFetch, memoryUsedInFetch = 0;
 	ByteBuffer bb;
 	boolean isThere;
 	long rrelapsedtime;
@@ -73,10 +70,10 @@ public class FlashJoinV5 {
 		boolean firstJoinTable2 = false;
 		String[] selectFirstRelation = null;
 		String[] selectSecondRelation = null;
-		int memorySize = Integer.parseInt("1024000000");
-		int memorySizeFetchKernel = Integer.parseInt("1024000000");
+		int memorySize = Integer.parseInt("1024000");// bytes
+		int memorySizeFetchKernel = Integer.parseInt("1024000");
 		String headerJoin = null;
-		String teste = "QA";
+		String teste = "Q3";
 		String anmom = "";
 		// 3 ta dando erro na segunda
 		String nada = "1";
@@ -86,7 +83,7 @@ public class FlashJoinV5 {
 		String data;
 		result = "C:/TPCH10/VLDB/";
 		data = "C:/TPCH10/";
-		
+
 		if (teste.equals("Q5")) {
 
 			// SELECT count (*)
@@ -125,8 +122,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "region" };
 			flobj01.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] { "nation[A(55)]|",
-					"region[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "nation[A(55)]|", "region[A(55)]|" };
 			flobj01.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "nation[A(55)]|region[A(55)]|";
@@ -179,8 +175,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "customer" };
 			flobj02.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] { "nation[A(55)]|region[A(55)]|",
-					"customer[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "nation[A(55)]|region[A(55)]|", "customer[A(55)]|" };
 			flobj02.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "nation[A(55)]|region[A(55)]|customer[A(55)]|";
@@ -227,16 +222,13 @@ public class FlashJoinV5 {
 			selectSecondRelation = new String[] { "o_orderdate>=1994-01-01 and o_orderdate<1995-01-01" };
 			flobj03.setSelectSecondRelation(selectSecondRelation);
 
-			columnsFirstRelation = new String[] { "nation", "region",
-					"customer" };
+			columnsFirstRelation = new String[] { "nation", "region", "customer" };
 			flobj03.setColumnsFirstRelation(columnsFirstRelation);
 
 			columnsSecondRelation = new String[] { "orders" };
 			flobj03.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] {
-					"nation[A(55)]|region[A(55)]|customer[A(55)]|",
-					"orders[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "nation[A(55)]|region[A(55)]|customer[A(55)]|", "orders[A(55)]|" };
 			flobj03.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|";
@@ -283,15 +275,13 @@ public class FlashJoinV5 {
 			selectSecondRelation = null;
 			flobj04.setSelectSecondRelation(selectSecondRelation);
 
-			columnsFirstRelation = new String[] { "nation", "region",
-					"customer", "orders" };
+			columnsFirstRelation = new String[] { "nation", "region", "customer", "orders" };
 			flobj04.setColumnsFirstRelation(columnsFirstRelation);
 
 			columnsSecondRelation = new String[] { "lineitem" };
 			flobj04.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] {
-					"nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|",
+			auxHeaderOverFlow = new String[] { "nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|",
 					"lineitem[A(55)]|" };
 			flobj04.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
@@ -339,16 +329,14 @@ public class FlashJoinV5 {
 			selectSecondRelation = null;
 			flobj05.setSelectSecondRelation(selectSecondRelation);
 
-			columnsFirstRelation = new String[] { "nation", "region",
-					"customer", "orders", "lineitem" };
+			columnsFirstRelation = new String[] { "nation", "region", "customer", "orders", "lineitem" };
 			flobj05.setColumnsFirstRelation(columnsFirstRelation);
 
 			columnsSecondRelation = new String[] { "supplier" };
 			flobj05.setColumnsSecondRelation(columnsSecondRelation);
 
 			auxHeaderOverFlow = new String[] {
-					"nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|lineitem[A(55)]|",
-					"supplier[A(55)]|" };
+					"nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|lineitem[A(55)]|", "supplier[A(55)]|" };
 			flobj05.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "nation[A(55)]|region[A(55)]|customer[A(55)]|orders[A(55)]|lineitem[A(55)]|supplier[A(55)]|";
@@ -367,11 +355,10 @@ public class FlashJoinV5 {
 			flobj05.setTable2_BD("Supplier");
 
 			flobj05.kernel.tableFromJoinKernel = data + "intermediateTableQ5.b";
-			flobj05.kernel.tablesReRead = new String[] { data + "nation.b",
-					data + "region.b", data + "customer.b", data + "orders.b",
-					data + "lineitem.b", data + "supplier.b" };
-			flobj05.kernel.ColReRead = new String[] { "nation", "region",
-					"customer", "orders", "lineitem", "supplier" };
+			flobj05.kernel.tablesReRead = new String[] { data + "nation.b", data + "region.b", data + "customer.b",
+					data + "orders.b", data + "lineitem.b", data + "supplier.b" };
+			flobj05.kernel.ColReRead = new String[] { "nation", "region", "customer", "orders", "lineitem",
+					"supplier" };
 			flobj05.kernel.atbReRead = null;
 			flobj05.kernel.lastJoin = true;
 			flobj05.kernel.tableToNextJoin = data + "NextJoinQ5.b";
@@ -422,8 +409,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "orders" };
 			flobj01.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] { "customer[A(55)]|",
-					"orders[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "customer[A(55)]|", "orders[A(55)]|" };
 			flobj01.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "customer[A(55)]|orders[A(55)]|";
@@ -441,8 +427,7 @@ public class FlashJoinV5 {
 			flobj01.setTable1_BD("Customer");
 			flobj01.setTable2_BD("Orders");
 
-			flobj01.kernel.tableFromJoinKernel = data
-					+ "intermediateTableQ10.b";
+			flobj01.kernel.tableFromJoinKernel = data + "intermediateTableQ10.b";
 			flobj01.kernel.tablesReRead = new String[] { data + "orders.b" };
 			flobj01.kernel.ColReRead = new String[] { "orders" };
 			flobj01.kernel.atbReRead = new String[] { "orderkey" };
@@ -477,8 +462,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "lineitem" };
 			flobj02.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] {
-					"customer[A(55)]|orders[A(55)]|", "lineitem[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "customer[A(55)]|orders[A(55)]|", "lineitem[A(55)]|" };
 			flobj02.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "customer[A(55)]|orders[A(55)]|lineitem[A(55)]|";
@@ -496,8 +480,7 @@ public class FlashJoinV5 {
 			flobj02.setTable1_BD("Customer_Orders");
 			flobj02.setTable2_BD("Lineitem");
 
-			flobj02.kernel.tableFromJoinKernel = data
-					+ "intermediateTableQ10.b";
+			flobj02.kernel.tableFromJoinKernel = data + "intermediateTableQ10.b";
 			flobj02.kernel.tablesReRead = new String[] { data + "customer.b" };
 			flobj02.kernel.ColReRead = new String[] { "customer" };
 			flobj02.kernel.atbReRead = new String[] { "nationkey" };
@@ -526,16 +509,13 @@ public class FlashJoinV5 {
 			selectSecondRelation = null;
 			flobj03.setSelectSecondRelation(selectSecondRelation);
 
-			columnsFirstRelation = new String[] { "customer", "orders",
-					"lineitem" };
+			columnsFirstRelation = new String[] { "customer", "orders", "lineitem" };
 			flobj03.setColumnsFirstRelation(columnsFirstRelation);
 
 			columnsSecondRelation = new String[] { "nation" };
 			flobj03.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] {
-					"customer[A(55)]|orders[A(55)]|lineitem[A(55)]|",
-					"nation[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "customer[A(55)]|orders[A(55)]|lineitem[A(55)]|", "nation[A(55)]|" };
 			flobj03.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "customer[A(55)]|orders[A(55)]|lineitem[A(55)]|nation[A(55)]|";
@@ -553,12 +533,10 @@ public class FlashJoinV5 {
 			flobj03.setTable1_BD("Customer_Orders_Lineitem");
 			flobj03.setTable2_BD("Nation");
 
-			flobj03.kernel.tableFromJoinKernel = data
-					+ "intermediateTableQ10.b";
-			flobj03.kernel.tablesReRead = new String[] { data + "customer.b",
-					data + "orders.b", data + "lineitem.b", data + "nation.b" };
-			flobj03.kernel.ColReRead = new String[] { "customer", "orders",
-					"lineitem" };
+			flobj03.kernel.tableFromJoinKernel = data + "intermediateTableQ10.b";
+			flobj03.kernel.tablesReRead = new String[] { data + "customer.b", data + "orders.b", data + "lineitem.b",
+					data + "nation.b" };
+			flobj03.kernel.ColReRead = new String[] { "customer", "orders", "lineitem" };
 			flobj03.kernel.atbReRead = null;
 			flobj03.kernel.lastJoin = true;
 			flobj03.kernel.tableToNextJoin = data + "NextJoinQ10.b";
@@ -575,18 +553,15 @@ public class FlashJoinV5 {
 
 		if (teste.equals("Q3")) {
 
-			// select * from orders, lineitem where lineitem.l orderkey =
-			// orders.o orderkey and orders.o orderdate >= 1993-10-01 and
-			// orders.o orderdate < 1994-01-01 and lineitem.l returnflag=R
+			// select * from
+			// customer, orders, lineitem where order.custkey = customer.custkey and
+			// lineitem.orderkey = orders.orderkey and orders.o_orderdate < '1995-03-15' and
+			// lineitem.l_shipdate > '1995-03-15' and customer.c_mktsegment = 'BUILDING'
 
 			FlashObj flobj01 = new FlashObj();
 
 			resultlog = new LogFile(result + "Q3Flash.txt");
-//			resultlog
-//					.writeLog(" Q3 condition: select orderey, l_extendedprice, l_discount, o_orderdate, o_shippriority from customer, orders, lineitem where order.custkey = customer.custkey and lineitem.orderkey = orders.orderkey and orders.o_orderdate < '1995-03-15' and lineitem.l_shipdate > '1995-03-15' and customer.c_mktsegment = 'BUILDING'");
-//			resultlog.writeLog("JOIN = CUSTOMER X ORDERS X LINEITEM");
-
-//			System.out.println("JOIN 1 = ORDER x Lineitem");
+			// resultlog
 
 			joinColumnsFirstRelation = new String[] { "custkey" };
 			flobj01.setJoinColumnsFirstRelation(joinColumnsFirstRelation);
@@ -619,8 +594,7 @@ public class FlashJoinV5 {
 
 			flobj01.setTable2(data + "orders.b");
 
-			auxHeaderOverFlow = new String[] { "customer[A(55)]|",
-					"orders[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "customer[A(55)]|", "orders[A(55)]|" };
 			flobj01.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			flobj01.setIntermediateTableJoin(data + "intermediateTableQ3.b");
@@ -642,7 +616,7 @@ public class FlashJoinV5 {
 			// NextJoin
 			FlashObj flobj02 = new FlashObj();
 
-//			System.out.println("JOIN 2 = Customer x Orders x Lineitem");
+			// System.out.println("JOIN 2 = Customer x Orders x Lineitem");
 
 			joinColumnsFirstRelation = new String[] { "orderkey" };
 			flobj02.setJoinColumnsFirstRelation(joinColumnsFirstRelation);
@@ -662,8 +636,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "lineitem" };
 			flobj02.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] {
-					"customer[A(55)]|orders[A(55)]|", "lineitem[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "customer[A(55)]|orders[A(55)]|", "lineitem[A(55)]|" };
 			flobj02.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			selectFirstRelation = null;
@@ -688,10 +661,8 @@ public class FlashJoinV5 {
 			flobj02.setTable2_BD("Lineitem");
 
 			flobj02.kernel.tableFromJoinKernel = data + "intermediateTableQ3.b";
-			flobj02.kernel.tablesReRead = new String[] { data + "customer.b",
-					data + "orders.b", data + "lineitem.b" };
-			flobj02.kernel.ColReRead = new String[] { "customer", "orders",
-					"lineitem" };
+			flobj02.kernel.tablesReRead = new String[] { data + "customer.b", data + "orders.b", data + "lineitem.b" };
+			flobj02.kernel.ColReRead = new String[] { "customer", "orders", "lineitem" };
 			flobj02.kernel.lastJoin = true;
 			flobj02.kernel.tableToNextJoin = data + "NextJoinQ3.b";
 			flobj02.kernel.headerToNextJoin = "Final Projection";
@@ -731,8 +702,7 @@ public class FlashJoinV5 {
 			selectSecondRelation = new String[] { "l_returnflag=R" };
 			flobj01.setSelectSecondRelation(selectSecondRelation);
 
-			selectFirstRelation = new String[] { "o_orderdate>=1993-10-01",
-					"o_orderdate<1994-01-01" };
+			selectFirstRelation = new String[] { "o_orderdate>=1993-10-01", "o_orderdate<1994-01-01" };
 			flobj01.setSelectFirstRelation(selectFirstRelation);
 
 			columnsFirstRelation = new String[] { "orders" };
@@ -741,8 +711,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "lineitem" };
 			flobj01.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] { "orders[A(55)]|",
-					"lineitem[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "orders[A(55)]|", "lineitem[A(55)]|" };
 			flobj01.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "orders[A(55)]|lineitem[A(55)]|";
@@ -752,7 +721,7 @@ public class FlashJoinV5 {
 
 			flobj01.setTable2(data + "lineitem.b");
 
-			flobj01.setIntermediateTableJoin(data + "intermediateTableQB.b");
+			flobj01.setIntermediateTableJoin(data + "intermediateTableQA.b");
 
 			flobj01.setMemorySizeJoinKernel(memorySize);
 			flobj01.setMemorySizeFetchKernel(memorySizeFetchKernel);
@@ -761,8 +730,7 @@ public class FlashJoinV5 {
 			flobj01.setTable2_BD("Lineitem");
 
 			flobj01.kernel.tableFromJoinKernel = data + "intermediateTableQB.b";
-			flobj01.kernel.tablesReRead = new String[] { data + "orders.b",
-					data + "lineitem.b" };
+			flobj01.kernel.tablesReRead = new String[] { data + "orders.b", data + "lineitem.b" };
 			flobj01.kernel.ColReRead = new String[] { "orders", "lineitem" };
 			flobj01.kernel.lastJoin = true;
 			flobj01.kernel.tableToNextJoin = data + "NextJoinQB.b";
@@ -807,8 +775,7 @@ public class FlashJoinV5 {
 			columnsSecondRelation = new String[] { "lineitem" };
 			flobj01.setColumnsSecondRelation(columnsSecondRelation);
 
-			auxHeaderOverFlow = new String[] { "orders[A(55)]|",
-					"lineitem[A(55)]|" };
+			auxHeaderOverFlow = new String[] { "orders[A(55)]|", "lineitem[A(55)]|" };
 			flobj01.setAuxHeaderOverFlow(auxHeaderOverFlow);
 
 			headerJoin = "orders[A(55)]|lineitem[A(55)]|";
@@ -827,8 +794,7 @@ public class FlashJoinV5 {
 			flobj01.setTable2_BD("Lineitem");
 
 			flobj01.kernel.tableFromJoinKernel = data + "intermediateTableQB.b";
-			flobj01.kernel.tablesReRead = new String[] { data + "orders.b",
-					data + "lineitem.b" };
+			flobj01.kernel.tablesReRead = new String[] { data + "orders.b", data + "lineitem.b" };
 			flobj01.kernel.ColReRead = new String[] { "orders", "lineitem" };
 			flobj01.kernel.lastJoin = true;
 			flobj01.kernel.tableToNextJoin = data + "NextJoinQB.b";
@@ -896,31 +862,26 @@ public class FlashJoinV5 {
 			numbersOfKeysInMemorySmaller = 0;
 			numbersOfTuplesInMemoryBigger = 0;
 			numbersOfKeysInMemoryBigger = 0;
-			
-			vazao_Tb1 =0;
-			vazao_Tb2 =0;
+
+			vazao_Tb1 = 0;
+			vazao_Tb2 = 0;
 
 			FlashObj join = new FlashObj();
 			join = listjoin.get(w);
-			HashFunction.initialize((join.memorySizeJoinKernel * 10)
-					/ blockSize);
+			HashFunction.initialize((join.memorySizeJoinKernel * 10) / blockSize);
 
 			rrStartTime = System.currentTimeMillis();
 			// Iniciar 1 fase pela tabela1
 			hafSmaller.open(join.table1);
 			indJoinColsSmaller = new int[join.joinColumnsFirstRelation.length];
 			for (int i = 0; i < join.joinColumnsFirstRelation.length; i++) {
-				indJoinColsSmaller[i] = hafSmaller
-						.getColumnPos(join.joinColumnsFirstRelation[i]);
-				headerSmaller = headerSmaller
-						+ join.joinColumnsFirstRelation[i] + "[I(18)]|";
+				indJoinColsSmaller[i] = hafSmaller.getColumnPos(join.joinColumnsFirstRelation[i]);
+				headerSmaller = headerSmaller + join.joinColumnsFirstRelation[i] + "[I(18)]|";
 			}
 
-			indcolSmaller = hafSmaller
-					.getColumnPos(join.joinColumnsFirstRelation[0]);
+			indcolSmaller = hafSmaller.getColumnPos(join.joinColumnsFirstRelation[0]);
 			headerSmaller = headerSmaller + join.auxHeaderOverFlow[0];
-			hafSmallerOverFlow.create("C:/TPCH10/OverFlowSmaller.b",
-					headerSmaller);
+			hafSmallerOverFlow.create("C:/TPCH10/OverFlowSmaller.b", headerSmaller);
 			headerSmaller = "";
 
 			// Começando a ler a tabela1
@@ -931,9 +892,7 @@ public class FlashJoinV5 {
 					// Verificar a seletividade antes de particionar
 					if (join.getSelectFirstRelation() != null) {
 						for (int i = 0; i < join.getSelectFirstRelation().length; i++) {
-							selectSmaller = hafSmaller.checkCondition(
-									join.getSelectFirstRelation()[i],
-									tupleBlock);
+							selectSmaller = hafSmaller.checkCondition(join.getSelectFirstRelation()[i], tupleBlock);
 							if (!selectSmaller) {
 								i = join.getSelectFirstRelation().length;
 							}
@@ -944,11 +903,9 @@ public class FlashJoinV5 {
 					if (selectSmaller) {
 						vazao_Tb1++;
 						if (join.memorySizeJoinKernel > memoryUsed) {
-							sendToMemorySmaller(tupleBlock, hafSmaller,
-									indcolSmaller, indJoinColsSmaller, join);
+							sendToMemorySmaller(tupleBlock, hafSmaller, indcolSmaller, indJoinColsSmaller, join);
 						} else {
-							sendToDiskSmaller(tupleBlock, hafSmaller,
-									indcolSmaller, indJoinColsSmaller,
+							sendToDiskSmaller(tupleBlock, hafSmaller, indcolSmaller, indJoinColsSmaller,
 									hafSmallerOverFlow, join);
 						}
 					}
@@ -970,17 +927,13 @@ public class FlashJoinV5 {
 			hafBigger.open(join.table2);
 			indJoinColsBigger = new int[join.joinColumnsSecondRelation.length];
 			for (int i = 0; i < join.joinColumnsSecondRelation.length; i++) {
-				indJoinColsBigger[i] = hafBigger
-						.getColumnPos(join.joinColumnsSecondRelation[i]);
-				headerBigger = headerBigger + join.joinColumnsSecondRelation[i]
-						+ "[I(18)]|";
+				indJoinColsBigger[i] = hafBigger.getColumnPos(join.joinColumnsSecondRelation[i]);
+				headerBigger = headerBigger + join.joinColumnsSecondRelation[i] + "[I(18)]|";
 			}
 
-			indcolBigger = hafBigger
-					.getColumnPos(join.joinColumnsSecondRelation[0]);
+			indcolBigger = hafBigger.getColumnPos(join.joinColumnsSecondRelation[0]);
 			headerBigger = headerBigger + join.auxHeaderOverFlow[1];
-			hafBiggerOverFlow
-					.create("C:/TPCH10/OverFlowBigger.b", headerBigger);
+			hafBiggerOverFlow.create("C:/TPCH10/OverFlowBigger.b", headerBigger);
 			headerBigger = "";
 			// Começando a ler a tabela2
 			block = hafBigger.nextBlock();
@@ -990,9 +943,7 @@ public class FlashJoinV5 {
 					// Verificar a seletividade antes de particionar
 					if (join.getSelectSecondRelation() != null) {
 						for (int i = 0; i < join.getSelectSecondRelation().length; i++) {
-							selectBigger = hafBigger.checkCondition(
-									join.getSelectSecondRelation()[i],
-									tupleBlock);
+							selectBigger = hafBigger.checkCondition(join.getSelectSecondRelation()[i], tupleBlock);
 							if (!selectBigger) {
 								i = join.getSelectSecondRelation().length;
 							}
@@ -1003,13 +954,10 @@ public class FlashJoinV5 {
 					if (selectBigger) {
 						vazao_Tb2++;
 						if (join.memorySizeJoinKernel > memoryUsed) {
-							sendToMemoryBigger(tupleBlock, hafBigger,
-									indcolBigger, indJoinColsBigger, join);
+							sendToMemoryBigger(tupleBlock, hafBigger, indcolBigger, indJoinColsBigger, join);
 						} else {
-							sendToDiskBigger(tupleBlock, hafBigger,
-									indcolBigger, indJoinColsBigger,
-									hafSmallerOverFlow, hafBiggerOverFlow,
-									join.memorySizeJoinKernel, join);
+							sendToDiskBigger(tupleBlock, hafBigger, indcolBigger, indJoinColsBigger, hafSmallerOverFlow,
+									hafBiggerOverFlow, join.memorySizeJoinKernel, join);
 						}
 					}
 					calcMemory(join);
@@ -1033,68 +981,46 @@ public class FlashJoinV5 {
 			// System.out
 			// .println("Verificando os buckets em memoria e escrevendo");
 			// Estou sempre fazendo o Smaller para o Bigger
-			for (Integer hashResultInMapForSmaller : bucketsInMemoryForSmaller
-					.keySet()) {
-				if (bucketsInMemoryForBigger
-						.containsKey(hashResultInMapForSmaller)) {
-					auxBucketsInMemoryToHash = bucketsInMemoryForSmaller
-							.get(hashResultInMapForSmaller);
-					auxBucketsInMemory = bucketsInMemoryForBigger
-							.get(hashResultInMapForSmaller);
+			for (Integer hashResultInMapForSmaller : bucketsInMemoryForSmaller.keySet()) {
+				if (bucketsInMemoryForBigger.containsKey(hashResultInMapForSmaller)) {
+					auxBucketsInMemoryToHash = bucketsInMemoryForSmaller.get(hashResultInMapForSmaller);
+					auxBucketsInMemory = bucketsInMemoryForBigger.get(hashResultInMapForSmaller);
 					// Eu já estou com os dois buckets Smaller e Bigger
 					// Vou percorrer o smaller verificando se tem no bigger
-					for (ByteBuffer hashResultInMapForSmallerInside : auxBucketsInMemoryToHash
-							.keySet()) {
+					for (ByteBuffer hashResultInMapForSmallerInside : auxBucketsInMemoryToHash.keySet()) {
 						// Verificação já a nível de atributo de junção
-						if (auxBucketsInMemory
-								.containsKey(hashResultInMapForSmallerInside)) {
+						if (auxBucketsInMemory.containsKey(hashResultInMapForSmallerInside)) {
 							auxBucketsInMemoryInsideToHash = auxBucketsInMemoryToHash
 									.get(hashResultInMapForSmallerInside);
-							auxBucketsInMemoryInside = auxBucketsInMemory
-									.get(hashResultInMapForSmallerInside);
-//							 System.out.println("Atributo de Junção: "+hashResultInMapForSmallerInside);
-							keys = new byte[hashResultInMapForSmallerInside
-									.remaining()];
+							auxBucketsInMemoryInside = auxBucketsInMemory.get(hashResultInMapForSmallerInside);
+							// System.out.println("Atributo de Junção: "+hashResultInMapForSmallerInside);
+							keys = new byte[hashResultInMapForSmallerInside.remaining()];
 							hashResultInMapForSmallerInside.get(keys);
 
-							for (int i = 0; i < auxBucketsInMemoryInsideToHash
-									.size(); i++) {
+							for (int i = 0; i < auxBucketsInMemoryInsideToHash.size(); i++) {
 								// por se tem é porque eles tem o mesmo
 								// valor de
 								// key
-								tupleBlock = auxBucketsInMemoryInsideToHash
-										.get(i);
+								tupleBlock = auxBucketsInMemoryInsideToHash.get(i);
 								linhaAuxSmaller = "";
 								if (join.firstJoinTable1) {
-									linhaAuxSmaller = RafIOCalc
-											.getRowid(tupleBlock);
+									linhaAuxSmaller = RafIOCalc.getRowid(tupleBlock);
 
 								} else {
-									String[] auxReRead = RafIOCalc
-											.getLineString(
-													hafSmallerOverFlow,
-													auxBucketsInMemoryInsideToHash
-															.get(i),
-													hafSmallerOverFlow
-															.getQtCols())
+									String[] auxReRead = RafIOCalc.getLineString(hafSmallerOverFlow,
+											auxBucketsInMemoryInsideToHash.get(i), hafSmallerOverFlow.getQtCols())
 											.split("\\|");
 
 									for (int m = join.joinColumnsFirstRelation.length; m < auxReRead.length; m++) {
-										linhaAuxSmaller = linhaAuxSmaller
-												+ auxReRead[m] + "|";
+										linhaAuxSmaller = linhaAuxSmaller + auxReRead[m] + "|";
 									}
 
 								}
-								for (int j = 0; j < auxBucketsInMemoryInside
-										.size(); j++) {
-									tupleBlock = auxBucketsInMemoryInside
-											.get(j);
+								for (int j = 0; j < auxBucketsInMemoryInside.size(); j++) {
+									tupleBlock = auxBucketsInMemoryInside.get(j);
 									// Como é first a linha já é o rowid
-									linhaAuxBigger = RafIOCalc
-											.getRowid(auxBucketsInMemoryInside
-													.get(j));
-									linhaToAux = linhaAuxSmaller + "|"
-											+ linhaAuxBigger + "|";
+									linhaAuxBigger = RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j));
+									linhaToAux = linhaAuxSmaller + "|" + linhaAuxBigger + "|";
 									linhaToAux = linhaToAux.replace("||", "|");
 									numberOfTupleFinalJoin++;
 									// System.out.println(linhaToAux);
@@ -1112,25 +1038,24 @@ public class FlashJoinV5 {
 				} else {
 					// Só um verificação de erro, em todos os meus teste não
 					// entrou
-					 System.out.println("Não esta na Bigger: "
-					 + hashResultInMapForSmaller);
+					// System.out.println("Não esta na Bigger: " + hashResultInMapForSmaller);
 				}
 			}
-			 System.out.println("Fim da junção em memoria");
-			 System.out.println("Smaller");
-			 System.out.println(numbersOfKeysInMemorySmaller);
-			 System.out.println(numbersOfTuplesInMemorySmaller);
-			 System.out.println("Bigger");
-			 System.out.println(numbersOfKeysInMemoryBigger);
-			 System.out.println(numbersOfTuplesInMemoryBigger);
+			System.out.println("Fim da junção em memoria");
+			System.out.println("Smaller");
+			System.out.println(numbersOfKeysInMemorySmaller);
+			System.out.println(numbersOfTuplesInMemorySmaller);
+			System.out.println("Bigger");
+			System.out.println(numbersOfKeysInMemoryBigger);
+			System.out.println(numbersOfTuplesInMemoryBigger);
 
-			 System.out.println("Escritas Smaller");
-			 System.out.println(hafSmallerOverFlow.numberofWrite);
-			 System.out.println("Escritas Bigger");
-			 System.out.println(hafBiggerOverFlow.numberofWrite);
-			 System.out.println("MemoryJoin");
-			 System.out.println(numberOfTupleFinalJoin);
-			 System.out.println("+++++++++++++++++++++++++++++++++");
+			System.out.println("Escritas Smaller");
+			System.out.println(hafSmallerOverFlow.numberofWrite);
+			System.out.println("Escritas Bigger");
+			System.out.println(hafBiggerOverFlow.numberofWrite);
+			System.out.println("MemoryJoin");
+			System.out.println(numberOfTupleFinalJoin);
+			System.out.println("+++++++++++++++++++++++++++++++++");
 
 			// Variaveis
 			String linha = "";
@@ -1146,17 +1071,14 @@ public class FlashJoinV5 {
 			ArrayList<Integer> auxHash = new ArrayList<>();
 
 			for (int i = 0; i < join.joinColumnsSecondRelation.length; i++) {
-				indJoinColsBigger[i] = hafBiggerOverFlow
-						.getColumnPos(join.joinColumnsSecondRelation[i]);
+				indJoinColsBigger[i] = hafBiggerOverFlow.getColumnPos(join.joinColumnsSecondRelation[i]);
 			}
 
 			for (int i = 0; i < join.joinColumnsFirstRelation.length; i++) {
-				indJoinColsSmaller[i] = hafSmallerOverFlow
-						.getColumnPos(join.joinColumnsFirstRelation[i]);
+				indJoinColsSmaller[i] = hafSmallerOverFlow.getColumnPos(join.joinColumnsFirstRelation[i]);
 			}
 
-			for (Entry<Integer, ArrayList<Integer>> entry : mapOfTableSmaller
-					.entrySet()) {
+			for (Entry<Integer, ArrayList<Integer>> entry : mapOfTableSmaller.entrySet()) {
 				// hash(key)
 				keyHashMapSmaller = entry.getKey();
 				// blockNo of tuples of this hash
@@ -1167,15 +1089,12 @@ public class FlashJoinV5 {
 					block = hafSmallerOverFlow.readBlock(numblockreaded);
 					tupleBlock = hafSmallerOverFlow.nextTuple(block);
 					if (tupleBlock != null) {
-						linha = RafIOCalc.getLineString(hafSmallerOverFlow,
-								tupleBlock, hafSmallerOverFlow.getQtCols());
+						linha = RafIOCalc.getLineString(hafSmallerOverFlow, tupleBlock, hafSmallerOverFlow.getQtCols());
 					} else {
 						linha = null;
 					}
 					while (linha != null) {
-						keysSmaller = RafIOCalc.getKeys(tupleBlock,
-								indJoinColsSmaller,
-								hafSmallerOverFlow.getQtCols());
+						keysSmaller = RafIOCalc.getKeys(tupleBlock, indJoinColsSmaller, hafSmallerOverFlow.getQtCols());
 						bb = ByteBuffer.wrap(keysSmaller);
 						currentTupleId = hafSmallerOverFlow.getCurrentTupleId();
 						isThere = hashIndice.containsKey(bb);
@@ -1194,8 +1113,8 @@ public class FlashJoinV5 {
 						tupleBlock = hafSmallerOverFlow.nextTuple(block);
 
 						if (tupleBlock != null) {
-							linha = RafIOCalc.getLineString(hafSmallerOverFlow,
-									tupleBlock, hafSmallerOverFlow.getQtCols());
+							linha = RafIOCalc.getLineString(hafSmallerOverFlow, tupleBlock,
+									hafSmallerOverFlow.getQtCols());
 						} else {
 							linha = null;
 						}
@@ -1204,55 +1123,37 @@ public class FlashJoinV5 {
 
 				// Chech if keyHashMapSmaller exists on mapOfTableBigger
 				if (mapOfTableBigger.containsKey(keyHashMapSmaller)) {
-					vetOfhashResultAuxBigger = mapOfTableBigger
-							.get(keyHashMapSmaller);
+					vetOfhashResultAuxBigger = mapOfTableBigger.get(keyHashMapSmaller);
 					for (int i = 0; i < vetOfhashResultAuxBigger.size(); i++) {
-						numblockreadedAuxBigger = vetOfhashResultAuxBigger
-								.get(i);
-						blockAuxBigger = hafBiggerOverFlow
-								.readBlock(numblockreadedAuxBigger);
-						tupleBlockAuxBigger = hafBiggerOverFlow
-								.nextTuple(blockAuxBigger);
+						numblockreadedAuxBigger = vetOfhashResultAuxBigger.get(i);
+						blockAuxBigger = hafBiggerOverFlow.readBlock(numblockreadedAuxBigger);
+						tupleBlockAuxBigger = hafBiggerOverFlow.nextTuple(blockAuxBigger);
 						if (tupleBlockAuxBigger != null) {
-							linhaAuxBigger = RafIOCalc
-									.getColumn(
-											hafBiggerOverFlow,
-											tupleBlockAuxBigger,
-											hafBiggerOverFlow
-													.getColumnPos(join.columnsSecondRelation[0]),
-											hafBiggerOverFlow.getQtCols());
+							linhaAuxBigger = RafIOCalc.getColumn(hafBiggerOverFlow, tupleBlockAuxBigger,
+									hafBiggerOverFlow.getColumnPos(join.columnsSecondRelation[0]),
+									hafBiggerOverFlow.getQtCols());
 						} else {
 							linhaAuxBigger = null;
 						}
 						while (linhaAuxBigger != null) {
-							keysBigger = RafIOCalc.getKeys(tupleBlockAuxBigger,
-									indJoinColsBigger,
+							keysBigger = RafIOCalc.getKeys(tupleBlockAuxBigger, indJoinColsBigger,
 									hafBiggerOverFlow.getQtCols());
 							bb = ByteBuffer.wrap(keysBigger);
 							auxHash = hashIndice.get(bb);
 							if (auxHash != null) {
 								for (int j = 0; j < auxHash.size(); j = j + 2) {
-									block = hafSmallerOverFlow.raf
-											.readBlock(auxHash.get(j));
-									tupleBlock = hafSmallerOverFlow
-											.readTupleById(block,
-													auxHash.get(j + 1));
+									block = hafSmallerOverFlow.raf.readBlock(auxHash.get(j));
+									tupleBlock = hafSmallerOverFlow.readTupleById(block, auxHash.get(j + 1));
 
 									for (int k = 0; k < join.columnsFirstRelation.length; k++) {
 										linhaAuxSmaller = linhaAuxSmaller
-												+ RafIOCalc
-														.getColumn(
-																hafSmallerOverFlow,
-																tupleBlock,
-																hafSmallerOverFlow
-																		.getColumnPos(join.columnsFirstRelation[k]),
-																hafSmallerOverFlow
-																		.getQtCols())
+												+ RafIOCalc.getColumn(hafSmallerOverFlow, tupleBlock,
+														hafSmallerOverFlow.getColumnPos(join.columnsFirstRelation[k]),
+														hafSmallerOverFlow.getQtCols())
 												+ "|";
 									}
 
-									linhaToAux = linhaAuxSmaller + "|"
-											+ linhaAuxBigger + "|";
+									linhaToAux = linhaAuxSmaller + "|" + linhaAuxBigger + "|";
 									linhaToAux = linhaToAux.replace("||", "|");
 									addToFetch(linhaToAux, join, hafFlashJoin);
 									// hafFlashJoin.writeTuple(linhaToAux);
@@ -1266,16 +1167,11 @@ public class FlashJoinV5 {
 							}
 
 							linhaAuxBigger = "";
-							tupleBlockAuxBigger = hafBiggerOverFlow
-									.nextTuple(blockAuxBigger);
+							tupleBlockAuxBigger = hafBiggerOverFlow.nextTuple(blockAuxBigger);
 							if (tupleBlockAuxBigger != null) {
-								linhaAuxBigger = RafIOCalc
-										.getColumn(
-												hafBiggerOverFlow,
-												tupleBlockAuxBigger,
-												hafBiggerOverFlow
-														.getColumnPos(join.columnsSecondRelation[0]),
-												hafBiggerOverFlow.getQtCols());
+								linhaAuxBigger = RafIOCalc.getColumn(hafBiggerOverFlow, tupleBlockAuxBigger,
+										hafBiggerOverFlow.getColumnPos(join.columnsSecondRelation[0]),
+										hafBiggerOverFlow.getQtCols());
 							} else {
 								linhaAuxBigger = null;
 							}
@@ -1293,17 +1189,16 @@ public class FlashJoinV5 {
 			rrStopTime = System.currentTimeMillis();
 			timeJoinKernel = (rrStopTime - rrStartTime) / 1000;
 
-			tuple_DB = tuple_DB + join.table1_BD + "|" + vazao_Tb1 + "|"
-					+ join.table2_BD + "|" + vazao_Tb2 + "|";
+			tuple_DB = tuple_DB + join.table1_BD + "|" + vazao_Tb1 + "|" + join.table2_BD + "|" + vazao_Tb2 + "|";
 
 			// Escrita Tempo
-//			 resultlog.writeLog("Time Join: " + timeJoinKernel);
-//			 resultlog.writeLog("Escritas OverFlow Tabela 1: "
-//			 + hafSmallerOverFlow.numberofWrite);
-//			 resultlog.writeLog("Escritas OverFlow Tabela 2: "
-//			 + hafBiggerOverFlow.numberofWrite);
-//			 resultlog.writeLog("Escritas Join: " +
-//			 hafFlashJoin.numberofWrite);
+			// resultlog.writeLog("Time Join: " + timeJoinKernel);
+			// resultlog.writeLog("Escritas OverFlow Tabela 1: "
+			// + hafSmallerOverFlow.numberofWrite);
+			// resultlog.writeLog("Escritas OverFlow Tabela 2: "
+			// + hafBiggerOverFlow.numberofWrite);
+			// resultlog.writeLog("Escritas Join: " +
+			// hafFlashJoin.numberofWrite);
 			totaltimeJoinKernel = totaltimeJoinKernel + timeJoinKernel;
 			escritasAcumuladas += hafFlashJoin.numberofWrite;
 			escritasAcumuladas += (hafBiggerOverFlow.numberofWrite + hafSmallerOverFlow.numberofWrite);
@@ -1349,10 +1244,8 @@ public class FlashJoinV5 {
 				}
 			}
 			if (!join.kernel.lastJoin) {
-				hafNextFlashJoin.create(join.kernel.tableToNextJoin,
-						join.kernel.headerToNextJoin);
-				atribReRead = hafFlashJoin
-						.getColumnPos(join.kernel.ColReRead[0]);
+				hafNextFlashJoin.create(join.kernel.tableToNextJoin, join.kernel.headerToNextJoin);
+				atribReRead = hafFlashJoin.getColumnPos(join.kernel.ColReRead[0]);
 			}
 
 			// Tempo de Leitura
@@ -1363,60 +1256,42 @@ public class FlashJoinV5 {
 				while (tupleBlock != null) {
 					contagemFetch++;
 					// System.out.println(line);
-					line = RafIOCalc.getLineString(hafFlashJoin, tupleBlock,
-							hafFlashJoin.getQtCols());
+					line = RafIOCalc.getLineString(hafFlashJoin, tupleBlock, hafFlashJoin.getQtCols());
 					reRead = line.split("\\|");
 					// Start reRead
 					if (!join.kernel.lastJoin) {
 						// A releitura de atributo é de uma só tabela
 						reReadTuple = haf0.readRowid(reRead[atribReRead]);
 						for (int i = 0; i < join.kernel.atbReRead.length; i++) {
-							line = RafIOCalc
-									.getColumn(
-											haf0,
-											reReadTuple,
-											haf0.getColumnPos(join.kernel.atbReRead[i]),
-											haf0.getQtCols())
-									+ "|" + line;
+							line = RafIOCalc.getColumn(haf0, reReadTuple, haf0.getColumnPos(join.kernel.atbReRead[i]),
+									haf0.getQtCols()) + "|" + line;
 						}
 					} else {
 						line = "";
 						for (int i = 0; i < join.kernel.tablesReRead.length; i++) {
 							if (i == 0) {
 								reReadTuple = haf0.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf0,
-												reReadTuple, haf0.getQtCols());
+								line = line + RafIOCalc.getLineString(haf0, reReadTuple, haf0.getQtCols());
 							}
 							if (i == 1) {
 								reReadTuple = haf1.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf1,
-												reReadTuple, haf1.getQtCols());
+								line = line + RafIOCalc.getLineString(haf1, reReadTuple, haf1.getQtCols());
 							}
 							if (i == 2) {
 								reReadTuple = haf2.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf2,
-												reReadTuple, haf2.getQtCols());
+								line = line + RafIOCalc.getLineString(haf2, reReadTuple, haf2.getQtCols());
 							}
 							if (i == 3) {
 								reReadTuple = haf3.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf3,
-												reReadTuple, haf3.getQtCols());
+								line = line + RafIOCalc.getLineString(haf3, reReadTuple, haf3.getQtCols());
 							}
 							if (i == 4) {
 								reReadTuple = haf4.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf4,
-												reReadTuple, haf4.getQtCols());
+								line = line + RafIOCalc.getLineString(haf4, reReadTuple, haf4.getQtCols());
 							}
 							if (i == 5) {
 								reReadTuple = haf5.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf5,
-												reReadTuple, haf5.getQtCols());
+								line = line + RafIOCalc.getLineString(haf5, reReadTuple, haf5.getQtCols());
 							}
 						}
 					}
@@ -1435,7 +1310,7 @@ public class FlashJoinV5 {
 			ArrayList<String> fetchToDisk = new ArrayList<>();
 			for (Double key : fetchMap.keySet()) {
 				fetchToDisk = fetchMap.get(key);
-//				System.out.println(key);
+				// System.out.println(key);
 				for (int k = 0; k < fetchToDisk.size(); k++) {
 					contagemFetch++;
 					line = fetchToDisk.get(k);
@@ -1446,52 +1321,35 @@ public class FlashJoinV5 {
 						// A releitura de atributo é de uma só tabela
 						reReadTuple = haf0.readRowid(reRead[atribReRead]);
 						for (int i = 0; i < join.kernel.atbReRead.length; i++) {
-							line = RafIOCalc
-									.getColumn(
-											haf0,
-											reReadTuple,
-											haf0.getColumnPos(join.kernel.atbReRead[i]),
-											haf0.getQtCols())
-									+ "|" + line;
+							line = RafIOCalc.getColumn(haf0, reReadTuple, haf0.getColumnPos(join.kernel.atbReRead[i]),
+									haf0.getQtCols()) + "|" + line;
 						}
 					} else {
 						line = "";
 						for (int i = 0; i < join.kernel.tablesReRead.length; i++) {
 							if (i == 0) {
 								reReadTuple = haf0.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf0,
-												reReadTuple, haf0.getQtCols());
+								line = line + RafIOCalc.getLineString(haf0, reReadTuple, haf0.getQtCols());
 							}
 							if (i == 1) {
 								reReadTuple = haf1.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf1,
-												reReadTuple, haf1.getQtCols());
+								line = line + RafIOCalc.getLineString(haf1, reReadTuple, haf1.getQtCols());
 							}
 							if (i == 2) {
 								reReadTuple = haf2.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf2,
-												reReadTuple, haf2.getQtCols());
+								line = line + RafIOCalc.getLineString(haf2, reReadTuple, haf2.getQtCols());
 							}
 							if (i == 3) {
 								reReadTuple = haf3.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf3,
-												reReadTuple, haf3.getQtCols());
+								line = line + RafIOCalc.getLineString(haf3, reReadTuple, haf3.getQtCols());
 							}
 							if (i == 4) {
 								reReadTuple = haf4.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf4,
-												reReadTuple, haf4.getQtCols());
+								line = line + RafIOCalc.getLineString(haf4, reReadTuple, haf4.getQtCols());
 							}
 							if (i == 5) {
 								reReadTuple = haf5.readRowid(reRead[i]);
-								line = line
-										+ RafIOCalc.getLineString(haf5,
-												reReadTuple, haf5.getQtCols());
+								line = line + RafIOCalc.getLineString(haf5, reReadTuple, haf5.getQtCols());
 							}
 						}
 					}
@@ -1507,15 +1365,12 @@ public class FlashJoinV5 {
 			rrStopTime = System.currentTimeMillis();
 			timeFetchKernel = (rrStopTime - rrStartTime) / 1000;
 
-			tuple_DB = tuple_DB + timeJoinKernel + "|" + timeFetchKernel + "|"
-					+ hafSmallerOverFlow.numberofWrite + "|"
+			tuple_DB = tuple_DB + timeJoinKernel + "|" + timeFetchKernel + "|" + hafSmallerOverFlow.numberofWrite + "|"
 					+ hafBiggerOverFlow.numberofWrite + "|";
-			
-			
+
 			if (!join.kernel.lastJoin) {
 				hafNextFlashJoin.flush();
-				escritasAcumuladas = escritasAcumuladas
-						+ hafNextFlashJoin.numberofWrite;
+				escritasAcumuladas = escritasAcumuladas + hafNextFlashJoin.numberofWrite;
 				tuple_DB = tuple_DB + hafNextFlashJoin.numberofWrite + "|";
 				// Escrita Tempo
 				// resultlog.writeLog("Time Fetch: " + timeFetchKernel);
@@ -1528,7 +1383,6 @@ public class FlashJoinV5 {
 			}
 			totaltimeFetchKernel = totaltimeFetchKernel + timeFetchKernel;
 
-			
 			for (int i = 0; i < join.kernel.tablesReRead.length; i++) {
 				if (i == 0) {
 					releiturasAcumuladas += haf0.numberofReReadbyRowId;
@@ -1580,10 +1434,7 @@ public class FlashJoinV5 {
 				}
 			}
 
-		
-
-			tuple_DB = tuple_DB + escritasAcumuladas + "|"
-					+ releiturasAcumuladas + "|";
+			tuple_DB = tuple_DB + escritasAcumuladas + "|" + releiturasAcumuladas + "|";
 
 			if (join.kernel.lastJoin) {
 				// resultlog.writeLog("Total Time JoinKernel: "
@@ -1592,10 +1443,8 @@ public class FlashJoinV5 {
 				// + totaltimeFetchKernel);
 				// resultlog.writeLog("Number of Tuples: "
 				// + numberOfTupleFinalJoin);
-				tuple_DB = tuple_DB + totaltimeJoinKernel + "|"
-						+ totaltimeFetchKernel + "|"
-						+ (totaltimeJoinKernel + totaltimeFetchKernel) + "|"
-						+ numberOfTupleFinalJoin;
+				tuple_DB = tuple_DB + totaltimeJoinKernel + "|" + totaltimeFetchKernel + "|"
+						+ (totaltimeJoinKernel + totaltimeFetchKernel) + "|" + numberOfTupleFinalJoin;
 			}
 
 			numberOfTupleFinalJoin = 0;
@@ -1615,8 +1464,7 @@ public class FlashJoinV5 {
 
 	}
 
-	private void addToFetch(String linhaToAux2, FlashObj join,
-			HandleFile hafFetch) throws Exception {
+	private void addToFetch(String linhaToAux2, FlashObj join, HandleFile hafFetch) throws Exception {
 		Double sort = 0.0;
 		Double auxSort = 0.0;
 		String[] linhaSplit = linhaToAux2.split("\\|");
@@ -1659,18 +1507,14 @@ public class FlashJoinV5 {
 			}
 		}
 		fetchMap = new TreeMap<Double, ArrayList<String>>();
-		//fetchMap.clear();
+		// fetchMap.clear();
 	}
 
-	private void sendToDiskSmallerFinish(HandleFile hafSmallerOverFlow,
-			FlashObj join) throws Exception {
+	private void sendToDiskSmallerFinish(HandleFile hafSmallerOverFlow, FlashObj join) throws Exception {
 		for (Integer hashResultInMapForSmaller : mapOfTableSmaller.keySet()) {
-			if (bucketsInMemoryForSmaller
-					.containsKey(hashResultInMapForSmaller)) {
-				auxBucketsInMemory = bucketsInMemoryForSmaller
-						.get(hashResultInMapForSmaller);
-				vetOfhashResult = mapOfTableSmaller
-						.get(hashResultInMapForSmaller);
+			if (bucketsInMemoryForSmaller.containsKey(hashResultInMapForSmaller)) {
+				auxBucketsInMemory = bucketsInMemoryForSmaller.get(hashResultInMapForSmaller);
+				vetOfhashResult = mapOfTableSmaller.get(hashResultInMapForSmaller);
 				if (vetOfhashResult == null) {
 					vetOfhashResult = new ArrayList<>();
 				}
@@ -1687,39 +1531,29 @@ public class FlashJoinV5 {
 						if (join.firstJoinTable1) {
 							auxKeystoInt = 0;
 							chave.position(0);
-							chave.get(keysInMemoryInside, 0,
-									keysInMemoryInside.length);
+							chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 							for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 								byte temp[] = new byte[4];
 								for (int k = 0; k < 4; k++) {
 									temp[k] = keysInMemoryInside[auxKeystoInt];
 									auxKeystoInt++;
 								}
-								linhaToAux = linhaToAux
-										+ Integer.toString(RafIOCalc
-												.getInt(temp)) + "|";
+								linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 							}
-							linhaToAux = linhaToAux
-									+ RafIOCalc
-											.getRowid(auxBucketsInMemoryInside
-													.get(j)) + "|";
+							linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 						} else {
-							linhaToAux = RafIOCalc.getLineString(
-									hafSmallerOverFlow,
-									auxBucketsInMemoryInside.get(j),
+							linhaToAux = RafIOCalc.getLineString(hafSmallerOverFlow, auxBucketsInMemoryInside.get(j),
 									hafSmallerOverFlow.getQtCols());
 						}
 						numbersOfTuplesInMemorySmaller--;
 						hafSmallerOverFlow.writeTuple(linhaToAux);
 						linhaToAux = "";
-						numblockwritten = hafSmallerOverFlow.raf
-								.getMaxBlockNo();
+						numblockwritten = hafSmallerOverFlow.raf.getMaxBlockNo();
 						// write map of blocks
 						if (!vetOfhashResult.contains(numblockwritten)) {
 							vetOfhashResult.add(numblockwritten);
 						}
-						mapOfTableSmaller.put(hashResultInMapForSmaller,
-								vetOfhashResult);
+						mapOfTableSmaller.put(hashResultInMapForSmaller, vetOfhashResult);
 					}
 				}
 
@@ -1731,15 +1565,13 @@ public class FlashJoinV5 {
 
 	}
 
-	private void sendToDiskBiggerFinish(HandleFile hafSmallerOverFlow,
-			HandleFile hafBiggerOverFlow, FlashObj join) throws Exception {
+	private void sendToDiskBiggerFinish(HandleFile hafSmallerOverFlow, HandleFile hafBiggerOverFlow, FlashObj join)
+			throws Exception {
 		for (Integer hashResultInMapForSmaller : mapOfTableSmaller.keySet()) {
 			if (bucketsInMemoryForBigger.containsKey(hashResultInMapForSmaller)) {
-				auxBucketsInMemory = bucketsInMemoryForBigger
-						.get(hashResultInMapForSmaller);
+				auxBucketsInMemory = bucketsInMemoryForBigger.get(hashResultInMapForSmaller);
 
-				vetOfhashResult = mapOfTableBigger
-						.get(hashResultInMapForSmaller);
+				vetOfhashResult = mapOfTableBigger.get(hashResultInMapForSmaller);
 
 				if (vetOfhashResult == null) {
 					vetOfhashResult = new ArrayList<>();
@@ -1754,21 +1586,16 @@ public class FlashJoinV5 {
 					for (int j = 0; j < auxBucketsInMemoryInside.size(); j++) {
 						int auxKeystoInt = 0;
 						chave.position(0);
-						chave.get(keysInMemoryInside, 0,
-								keysInMemoryInside.length);
+						chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 						for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 							byte temp[] = new byte[4];
 							for (int k = 0; k < 4; k++) {
 								temp[k] = keysInMemoryInside[auxKeystoInt];
 								auxKeystoInt++;
 							}
-							linhaToAux = linhaToAux
-									+ Integer.toString(RafIOCalc.getInt(temp))
-									+ "|";
+							linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 						}
-						linhaToAux = linhaToAux
-								+ RafIOCalc.getRowid(auxBucketsInMemoryInside
-										.get(j)) + "|";
+						linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 						numbersOfTuplesInMemoryBigger--;
 						hafBiggerOverFlow.writeTuple(linhaToAux);
 						linhaToAux = "";
@@ -1777,8 +1604,7 @@ public class FlashJoinV5 {
 						if (!vetOfhashResult.contains(numblockwritten)) {
 							vetOfhashResult.add(numblockwritten);
 						}
-						mapOfTableBigger.put(hashResultInMapForSmaller,
-								vetOfhashResult);
+						mapOfTableBigger.put(hashResultInMapForSmaller, vetOfhashResult);
 					}
 				}
 
@@ -1792,35 +1618,28 @@ public class FlashJoinV5 {
 
 	private void calcMemory(FlashObj join) {
 		memoryUsed = 0;
-		memoryUsed = memoryUsed + numbersOfKeysInMemorySmaller
-				* (join.joinColumnsFirstRelation.length * 4);
-		memoryUsed = memoryUsed + numbersOfKeysInMemoryBigger
-				* (join.joinColumnsSecondRelation.length * 4);
-		memoryUsed = memoryUsed + numbersOfTuplesInMemorySmaller
-				* (join.columnsFirstRelation.length * 12);
-		memoryUsed = memoryUsed + numbersOfTuplesInMemoryBigger
-				* (join.columnsSecondRelation.length * 12);
+		memoryUsed = memoryUsed + numbersOfKeysInMemorySmaller * (join.joinColumnsFirstRelation.length * 4);
+		memoryUsed = memoryUsed + numbersOfKeysInMemoryBigger * (join.joinColumnsSecondRelation.length * 4);
+		memoryUsed = memoryUsed + numbersOfTuplesInMemorySmaller * (join.columnsFirstRelation.length * 12);
+		memoryUsed = memoryUsed + numbersOfTuplesInMemoryBigger * (join.columnsSecondRelation.length * 12);
 	}
 
 	private void calcMemorySortFetch(FlashObj join, int numberOfRowids) {
 		memoryUsedInFetch = (numberoftupleInFetch * (numberOfRowids * 12));
 	}
 
-	private void sendToDiskBigger(byte[] tupleBlockToMemory, HandleFile haf,
-			int indCol, int[] indJoinCols, HandleFile hafSmallerOverFlow,
-			HandleFile hafBiggerOverFlow, int memorySizeJoinKernel,
-			FlashObj join) throws Exception {
+	private void sendToDiskBigger(byte[] tupleBlockToMemory, HandleFile haf, int indCol, int[] indJoinCols,
+			HandleFile hafSmallerOverFlow, HandleFile hafBiggerOverFlow, int memorySizeJoinKernel, FlashObj join)
+			throws Exception {
 		// Nao manda a particao do hashResult
 		// Verificar quem esta em disco tb1 e mandar o correspondente tb2
 		// Verificar particoes
 		for (Integer hashResultInMapForSmaller : mapOfTableSmaller.keySet()) {
 
 			if (bucketsInMemoryForBigger.containsKey(hashResultInMapForSmaller)) {
-				auxBucketsInMemory = bucketsInMemoryForBigger
-						.get(hashResultInMapForSmaller);
+				auxBucketsInMemory = bucketsInMemoryForBigger.get(hashResultInMapForSmaller);
 
-				vetOfhashResult = mapOfTableBigger
-						.get(hashResultInMapForSmaller);
+				vetOfhashResult = mapOfTableBigger.get(hashResultInMapForSmaller);
 
 				if (vetOfhashResult == null) {
 					vetOfhashResult = new ArrayList<>();
@@ -1835,21 +1654,16 @@ public class FlashJoinV5 {
 					for (int j = 0; j < auxBucketsInMemoryInside.size(); j++) {
 						int auxKeystoInt = 0;
 						chave.position(0);
-						chave.get(keysInMemoryInside, 0,
-								keysInMemoryInside.length);
+						chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 						for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 							byte temp[] = new byte[4];
 							for (int k = 0; k < 4; k++) {
 								temp[k] = keysInMemoryInside[auxKeystoInt];
 								auxKeystoInt++;
 							}
-							linhaToAux = linhaToAux
-									+ Integer.toString(RafIOCalc.getInt(temp))
-									+ "|";
+							linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 						}
-						linhaToAux = linhaToAux
-								+ RafIOCalc.getRowid(auxBucketsInMemoryInside
-										.get(j)) + "|";
+						linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 						hafBiggerOverFlow.writeTuple(linhaToAux);
 						numbersOfTuplesInMemoryBigger--;
 						linhaToAux = "";
@@ -1858,8 +1672,7 @@ public class FlashJoinV5 {
 						if (!vetOfhashResult.contains(numblockwritten)) {
 							vetOfhashResult.add(numblockwritten);
 						}
-						mapOfTableBigger.put(hashResultInMapForSmaller,
-								vetOfhashResult);
+						mapOfTableBigger.put(hashResultInMapForSmaller, vetOfhashResult);
 					}
 				}
 				auxBucketsInMemory = new THashMap<ByteBuffer, ArrayList<byte[]>>();
@@ -1878,10 +1691,8 @@ public class FlashJoinV5 {
 			sendToMemoryBigger(tupleBlock, haf, indCol, indJoinCols, join);
 		} else {
 			// Enviar para disco a particao da tupla tb2
-			keyJoin = RafIOCalc.getKey(tupleBlockToMemory, indCol,
-					haf.getQtCols());
-			keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols,
-					haf.getQtCols());
+			keyJoin = RafIOCalc.getKey(tupleBlockToMemory, indCol, haf.getQtCols());
+			keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols, haf.getQtCols());
 			bb = ByteBuffer.wrap(keys);
 			hashResult = HashFunction.hashCode(keyJoin);
 			rowid = haf.getRowid(indCol);
@@ -1903,21 +1714,16 @@ public class FlashJoinV5 {
 					for (int j = 0; j < auxBucketsInMemoryInside.size(); j++) {
 						int auxKeystoInt = 0;
 						chave.position(0);
-						chave.get(keysInMemoryInside, 0,
-								keysInMemoryInside.length);
+						chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 						for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 							byte temp[] = new byte[4];
 							for (int k = 0; k < 4; k++) {
 								temp[k] = keysInMemoryInside[auxKeystoInt];
 								auxKeystoInt++;
 							}
-							linhaToAux = linhaToAux
-									+ Integer.toString(RafIOCalc.getInt(temp))
-									+ "|";
+							linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 						}
-						linhaToAux = linhaToAux
-								+ RafIOCalc.getRowid(auxBucketsInMemoryInside
-										.get(j)) + "|";
+						linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 						hafBiggerOverFlow.writeTuple(linhaToAux);
 						numbersOfTuplesInMemoryBigger--;
 						linhaToAux = "";
@@ -1939,8 +1745,7 @@ public class FlashJoinV5 {
 					temp[k] = keys[auxKeystoInt];
 					auxKeystoInt++;
 				}
-				linhaToAux = linhaToAux
-						+ Integer.toString(RafIOCalc.getInt(temp)) + "|";
+				linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 			}
 			linhaToAux = linhaToAux + RafIOCalc.getRowid(rowid) + "|";
 			hafBiggerOverFlow.writeTuple(linhaToAux);
@@ -1972,34 +1777,25 @@ public class FlashJoinV5 {
 						if (join.firstJoinTable1) {
 							auxKeystoInt = 0;
 							chave.position(0);
-							chave.get(keysInMemoryInside, 0,
-									keysInMemoryInside.length);
+							chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 							for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 								byte temp[] = new byte[4];
 								for (int k = 0; k < 4; k++) {
 									temp[k] = keysInMemoryInside[auxKeystoInt];
 									auxKeystoInt++;
 								}
-								linhaToAux = linhaToAux
-										+ Integer.toString(RafIOCalc
-												.getInt(temp)) + "|";
+								linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 							}
-							linhaToAux = linhaToAux
-									+ RafIOCalc
-											.getRowid(auxBucketsInMemoryInside
-													.get(j)) + "|";
+							linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 						} else {
-							linhaToAux = RafIOCalc.getLineString(
-									hafSmallerOverFlow,
-									auxBucketsInMemoryInside.get(j),
+							linhaToAux = RafIOCalc.getLineString(hafSmallerOverFlow, auxBucketsInMemoryInside.get(j),
 									hafSmallerOverFlow.getQtCols());
 						}
 
 						hafSmallerOverFlow.writeTuple(linhaToAux);
 						numbersOfTuplesInMemorySmaller--;
 						linhaToAux = "";
-						numblockwritten = hafSmallerOverFlow.raf
-								.getMaxBlockNo();
+						numblockwritten = hafSmallerOverFlow.raf.getMaxBlockNo();
 						// write map of blocks
 						if (!vetOfhashResult.contains(numblockwritten)) {
 							vetOfhashResult.add(numblockwritten);
@@ -2016,12 +1812,11 @@ public class FlashJoinV5 {
 
 	}
 
-	private void sendToMemoryBigger(byte[] tupleBlockToMemory, HandleFile haf,
-			int indCol, int[] indJoinCols, FlashObj join) {
+	private void sendToMemoryBigger(byte[] tupleBlockToMemory, HandleFile haf, int indCol, int[] indJoinCols,
+			FlashObj join) {
 
 		keyJoin = RafIOCalc.getKey(tupleBlockToMemory, indCol, haf.getQtCols());
-		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols,
-				haf.getQtCols());
+		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols, haf.getQtCols());
 		bb = ByteBuffer.wrap(keys);
 		hashResult = HashFunction.hashCode(keyJoin);
 		if (join.firstJoinTable2) {
@@ -2062,12 +1857,10 @@ public class FlashJoinV5 {
 
 	}
 
-	private void sendToDiskSmaller(byte[] tupleBlockToMemory, HandleFile haf,
-			int indCol, int[] indJoinCols, HandleFile hafOverFlow, FlashObj join)
-			throws Exception {
+	private void sendToDiskSmaller(byte[] tupleBlockToMemory, HandleFile haf, int indCol, int[] indJoinCols,
+			HandleFile hafOverFlow, FlashObj join) throws Exception {
 		keyJoin = RafIOCalc.getKey(tupleBlockToMemory, indCol, haf.getQtCols());
-		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols,
-				haf.getQtCols());
+		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols, haf.getQtCols());
 		bb = ByteBuffer.wrap(keys);
 		hashResult = HashFunction.hashCode(keyJoin);
 		// Se é firstJoin trabalha nível de byte
@@ -2096,24 +1889,18 @@ public class FlashJoinV5 {
 						auxKeystoInt = 0;
 						byte[] keysInMemoryInside = new byte[chave.remaining()];
 						chave.position(0);
-						chave.get(keysInMemoryInside, 0,
-								keysInMemoryInside.length);
+						chave.get(keysInMemoryInside, 0, keysInMemoryInside.length);
 						for (int i = 0; i < keysInMemoryInside.length / 4; i++) {
 							byte temp[] = new byte[keysInMemoryInside.length];
 							for (int k = 0; k < 4; k++) {
 								temp[k] = keysInMemoryInside[auxKeystoInt];
 								auxKeystoInt++;
 							}
-							linhaToAux = linhaToAux
-									+ Integer.toString(RafIOCalc.getInt(temp))
-									+ "|";
+							linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 						}
-						linhaToAux = linhaToAux
-								+ RafIOCalc.getRowid(auxBucketsInMemoryInside
-										.get(j)) + "|";
+						linhaToAux = linhaToAux + RafIOCalc.getRowid(auxBucketsInMemoryInside.get(j)) + "|";
 					} else {
-						linhaToAux = RafIOCalc.getLineString(hafOverFlow,
-								auxBucketsInMemoryInside.get(j),
+						linhaToAux = RafIOCalc.getLineString(hafOverFlow, auxBucketsInMemoryInside.get(j),
 								hafOverFlow.getQtCols());
 					}
 
@@ -2139,13 +1926,11 @@ public class FlashJoinV5 {
 					temp[k] = keys[auxKeystoInt];
 					auxKeystoInt++;
 				}
-				linhaToAux = linhaToAux
-						+ Integer.toString(RafIOCalc.getInt(temp)) + "|";
+				linhaToAux = linhaToAux + Integer.toString(RafIOCalc.getInt(temp)) + "|";
 			}
 			linhaToAux = linhaToAux + RafIOCalc.getRowid(rowid) + "|";
 		} else {
-			linhaToAux = RafIOCalc.getLineString(hafOverFlow, rowid,
-					hafOverFlow.getQtCols());
+			linhaToAux = RafIOCalc.getLineString(hafOverFlow, rowid, hafOverFlow.getQtCols());
 		}
 		hafOverFlow.writeTuple(linhaToAux);
 		linhaToAux = "";
@@ -2165,14 +1950,13 @@ public class FlashJoinV5 {
 		auxBucketsInMemory = new THashMap<ByteBuffer, ArrayList<byte[]>>();
 		bucketsInMemoryForSmaller.put(hashResult, auxBucketsInMemory);
 		bucketsInMemoryForSmaller.remove(hashResult);
-		//bucketsInMemoryForSmaller.remove(hashResult);
+		// bucketsInMemoryForSmaller.remove(hashResult);
 	}
 
-	private void sendToMemorySmaller(byte[] tupleBlockToMemory, HandleFile haf,
-			int indCol, int[] indJoinCols, FlashObj join) {
+	private void sendToMemorySmaller(byte[] tupleBlockToMemory, HandleFile haf, int indCol, int[] indJoinCols,
+			FlashObj join) {
 		keyJoin = RafIOCalc.getKey(tupleBlockToMemory, indCol, haf.getQtCols());
-		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols,
-				haf.getQtCols());
+		keys = RafIOCalc.getKeys(tupleBlockToMemory, indJoinCols, haf.getQtCols());
 		bb = ByteBuffer.wrap(keys);
 		hashResult = HashFunction.hashCode(keyJoin);
 		if (join.firstJoinTable1) {

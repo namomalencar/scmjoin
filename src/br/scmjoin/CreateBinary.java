@@ -3,8 +3,6 @@ package br.scmjoin;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import br.scmjoin.HandleFile;
-
 
 public class CreateBinary {
 	
@@ -16,10 +14,10 @@ public class CreateBinary {
 	  //  byte tupleBlock[];
 		HandleFile haf = new HandleFile(blockSize);				
 		try {
-			br = new BufferedReader(new FileReader("C:\\TPCH_10\\supplier.txt"));
+			br = new BufferedReader(new FileReader("C:/Users/'Hamilton/Desktop/supplier.txt"));
 			line = br.readLine();	    	 
 			
-		    haf.create("C:\\TPCH_10\\supplier.b", line);
+		    haf.create("C:/Users/'Hamilton/Desktop/supplier.b", line);
 		  
 		    line = br.readLine();
 		    while (line != null && line.trim() != "") {	 		        
@@ -32,7 +30,7 @@ public class CreateBinary {
 		    br.close();
 		    
 		    
-			haf.open("C:\\TPCH_10\\supplier.b");
+			haf.open("C:/Users/'Hamilton/Desktop/supplier.b");
 			
 		//	System.out.println(haf.numberOfBlocks);
 			//block = haf.readBlock(185);

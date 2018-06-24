@@ -10,7 +10,7 @@ public class ReadTable {
     static byte tupleBlock[];
 	private static int numberOfThreads;
 	private static int jump;
-	private static String directory = "C:\\TPCH_10\\orders.b";
+	private static String directory = "C:\\TPCH10\\lineitem.b";
 	static ArrayList<ReadBinaryThread> listOfThreads = new ArrayList<ReadBinaryThread>();
 	
 	public static void main(String[] args) {

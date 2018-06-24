@@ -27,36 +27,33 @@ public class LoadFile {
 
 		int indIni, indFim, val;
 
-		int blo = 340000;
+		int blo = 1;
 		try {
 
-//			HandleFile hafTeste = new HandleFile(blockSize);
-//			hafTeste.open("C:/TPCH_10/supplier.b");
-//			hafTeste.gatherStats();
-//			System.exit(0);
-//			 System.out.println(hafTeste.numberOfTuples);
-//			 System.out.println(hafTeste.numberOfBlocks);
-//			 System.exit(0);
-//			System.out.println(RafIOCalc.getHeaderString(hafTeste));
-//			byte[] block = hafTeste.nextBlock();
-//			block = hafTeste.readBlock(blo);
-			// hafTeste.gatherStats();
-			blo++;
-//			while (block != null) {
-//				byte[] tupleBlock = hafTeste.nextTuple(block);
-//				while (tupleBlock != null) {
-//					// System.out.println(hafTeste.gatherStats(););
-//					// rowid = hafTeste.getRowid(1);
-//					System.out.println(RafIOCalc.getLineString(hafTeste,
-//							tupleBlock, hafTeste.getQtCols()));
-//					// String x = hafTeste.readRowid(rowid);
-//					// System.out.println(RafIOCalc.getRowid(rowid));
-//					// System.out.println(RafIOCalc.getLineString(hafTeste,
-//					// tupleBlock, hafTeste.getQtCols()));
-//					tupleBlock = hafTeste.nextTuple(block);
-//				}
-//				block = hafTeste.nextBlock();
-//			}
+			HandleFile hafTeste = new HandleFile(blockSize);
+			hafTeste.open("C:/TPCH10/supplier.b");
+			hafTeste.gatherStats();
+			System.out.println(hafTeste.numberOfTuples);
+			System.out.println(hafTeste.numberOfBlocks);
+			System.out.println(RafIOCalc.getHeaderString(hafTeste));
+			byte[] block = hafTeste.nextBlock();
+			block = hafTeste.readBlock(blo);
+			//hafTeste.gatherStats();
+			//blo++;
+			while (block != null) {
+				byte[] tupleBlock = hafTeste.nextTuple(block);
+				while (tupleBlock != null) {
+					// System.out.println(hafTeste.gatherStats(););
+					// rowid = hafTeste.getRowid(1);
+					System.out.println(RafIOCalc.getLineString(hafTeste, tupleBlock, hafTeste.getQtCols()));
+					// String x = hafTeste.readRowid(rowid);
+					// System.out.println(RafIOCalc.getRowid(rowid));
+					// System.out.println(RafIOCalc.getLineString(hafTeste,
+					// tupleBlock, hafTeste.getQtCols()));
+					tupleBlock = hafTeste.nextTuple(block);
+				}
+				block = hafTeste.nextBlock();
+			}
 
 			// Depois da juncao utiliza a primeira funcao hash novamente para
 			// bucketizar os rowids,
@@ -71,55 +68,54 @@ public class LoadFile {
 			// Como é um novo operador, ele deve ter uma memoria só para ele que
 			// deve ser definida"manualmente"
 
-//			System.exit(0);
+			System.exit(0);
 			//
 			//
 			//
 			// System.exit(0);
-//			 filename = "D:/TPCH/TPCH10/lineitem.b";
+			// filename = "D:/TPCH/TPCH10/lineitem.b";
 			// filename =
 			// "C:/Users/SCMJOIN/Desktop/Proj.Pesquisa/TPCH_10/nation.b";
 			// filename = "c:/RAFIO/TPCH_1/lineitem.b";
-			 filename = "C:/TPCH10/supplier.b";
+			filename = "C:/TPCH10/supplier.b";
 
-//			 br = new BufferedReader(new
-//			 FileReader("C:/Users/SCMJOIN/Desktop/Proj.Pesquisa/TPCH_10/nation.tbl"));
-//			 br = new BufferedReader(new
-//			 FileReader("C:/RAFIO/TPCH_1/nation.txt"));
-			 br = new BufferedReader(
-			 new FileReader("C:/TPCH10/supplier.tbl"));
+			// br = new BufferedReader(new
+			// FileReader("C:/Users/SCMJOIN/Desktop/Proj.Pesquisa/TPCH_10/nation.tbl"));
+			// br = new BufferedReader(new
+			// FileReader("C:/RAFIO/TPCH_1/nation.txt"));
+			br = new BufferedReader(new FileReader("C:/TPCH10/supplier.tbl"));
 			//
-//			 headerline = br.readLine();
+			// headerline = br.readLine();
 			// System.out.println(headerline);
 			// System.exit(0);
 
 			// header of lineitem
-			 //headerline =
-			 //"orderkey[I(18)]|partkey[I(18)]|suppkey[I(18)]|l_linenumber[I(18)]|l_quantity[F(18,2)]|l_extendedprice[F(18,2)]|l_discount[F(18,2)]|l_tax[F(18,2)]|l_returnflag[A(1)]|l_linestatus[A(1)]|l_shipdate[A(30)]|l_commitdate[A(30)]|l_receiptdate[A(30)]|l_shipinstruct[A(25)]|l_shipmode[A(10)]|l_comment[A(44)]|";
+			// headerline =
+			// "orderkey[I(18)]|partkey[I(18)]|suppkey[I(18)]|l_linenumber[I(18)]|l_quantity[F(18,2)]|l_extendedprice[F(18,2)]|l_discount[F(18,2)]|l_tax[F(18,2)]|l_returnflag[A(1)]|l_linestatus[A(1)]|l_shipdate[A(30)]|l_commitdate[A(30)]|l_receiptdate[A(30)]|l_shipinstruct[A(25)]|l_shipmode[A(10)]|l_comment[A(44)]|";
 
 			// header of partsupp
-//			 headerline =
-//			 "partkey[I(18)]|suppkey[I(18)]|ps_availqty[I(18)]|ps_supplycost[F(18,2)]|ps_comment[A(199)]|";
+			// headerline =
+			// "partkey[I(18)]|suppkey[I(18)]|ps_availqty[I(18)]|ps_supplycost[F(18,2)]|ps_comment[A(199)]|";
 
 			// header of part
-//			 headerline =
-//			 "partkey[I(18)]|p_name[A(55)]|p_mfgr[A(25)]|p_brand[A(10)]|p_type[A(25)]|p_size[I(18)]|p_container[A(10)]|p_retailprice[F(18,2)]|p_comment[A(23)]|";
-
-			 //header of order
 			// headerline =
-			 //"orderkey[I(18)]|custkey[I(18)]|o_orderstatus[A(1)]|o_totalprice[F(18,2)]|o_orderdate[A(30)]|o_orderpriority[A(15)]|o_clerk[A(15)]|o_shippriority[I(18)]|o_comment[A(79)]|";
+			// "partkey[I(18)]|p_name[A(55)]|p_mfgr[A(25)]|p_brand[A(10)]|p_type[A(25)]|p_size[I(18)]|p_container[A(10)]|p_retailprice[F(18,2)]|p_comment[A(23)]|";
+
+			// header of order
+			// headerline =
+			// "orderkey[I(18)]|custkey[I(18)]|o_orderstatus[A(1)]|o_totalprice[F(18,2)]|o_orderdate[A(30)]|o_orderpriority[A(15)]|o_clerk[A(15)]|o_shippriority[I(18)]|o_comment[A(79)]|";
 
 			// header of customer
-//			 headerline =
-//			 "custkey[I(18)]|c_name[A(25)]|c_address[A(40)]|nationkey[I(18)]|c_phone[A(15)]|c_acctbal[F(18,2)]|c_mktsegment[A(10)]|c_comment[A(117)]|";
+			// headerline =
+			// "custkey[I(18)]|c_name[A(25)]|c_address[A(40)]|nationkey[I(18)]|c_phone[A(15)]|c_acctbal[F(18,2)]|c_mktsegment[A(10)]|c_comment[A(117)]|";
 
 			// header of nation
-//			 headerline =
-//			 "nationkey[I(18)]|n_name[A(25)]|regionkey[I(18)]|n_comment[A(152)]|";
+			// headerline =
+			// "nationkey[I(18)]|n_name[A(25)]|regionkey[I(18)]|n_comment[A(152)]|";
 
 			// header of region
-//			 headerline =
-//			 "regionkey[I(18)]|r_name[A(25)]|r_comment[A(40)]|";
+			// headerline =
+			// "regionkey[I(18)]|r_name[A(25)]|r_comment[A(40)]|";
 
 			// header of supplier
 			headerline = "suppkey[I(18)]|s_name[A(25)]|s_address[A(40)]|nationkey[I(18)]|s_phone[A(15)]|s_acctbal[F(18,2)]|s_comment[A(10)]|";
@@ -177,7 +173,7 @@ public class LoadFile {
 			// for (TIntObjectIterator it = haf.histogram.iterator();
 			// it.hasNext();) {
 			// it.advance();
-			// System.out.println("Column: " + it.key() + "  "
+			// System.out.println("Column: " + it.key() + " "
 			// + haf.tupleStruct.get(it.key()).columnName);
 			// hist = (Histogram) it.value();
 			// System.out.println("Biggest freq value: " + hist.valBigFreq);
